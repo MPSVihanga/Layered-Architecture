@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1199.0" styleClass="gradient-background" stylesheets="@../assests/style/wastage.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.supermarket.controller.WastageController">
+   <children>
+      <ImageView fitHeight="47.0" fitWidth="54.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assests/wastage/recycle-bin.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="70.0" layoutY="14.0" prefHeight="47.0" prefWidth="149.0" styleClass="wastageMain" text="Wastage" />
+      <Separator layoutX="8.0" layoutY="61.0" prefHeight="20.0" prefWidth="1181.0" />
+      <TableView fx:id="tblWastage" layoutX="14.0" layoutY="81.0" prefHeight="560.0" prefWidth="856.0">
+        <columns>
+          <TableColumn fx:id="colWastageID" prefWidth="138.0" text="Wastage ID" />
+          <TableColumn fx:id="colProductId" prefWidth="148.0" text="Product ID" />
+            <TableColumn fx:id="colDate" prefWidth="162.0" text="Date" />
+            <TableColumn fx:id="colReason" prefWidth="297.0" text="Reason " />
+            <TableColumn fx:id="colQty" prefWidth="114.0" text="Qty" />
+        </columns>
+      </TableView>
+      <Label alignment="CENTER" layoutX="917.0" layoutY="100.0" prefHeight="60.0" prefWidth="268.0" text="Manage Items">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbProduct" focusColor="BLACK" layoutX="900.0" layoutY="248.0" prefHeight="60.0" prefWidth="288.0" promptText="Choose Product" styleClass="POSTxtfields" stylesheets="@../assests/style/pos.css" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtQty" alignment="CENTER" focusColor="BLACK" layoutX="993.0" layoutY="326.0" onKeyReleased="#KeyOnType" prefHeight="60.0" prefWidth="99.0" promptText="Qty" unFocusColor="BLACK">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </JFXTextField>
+      <Separator layoutX="881.0" layoutY="81.0" orientation="VERTICAL" prefHeight="560.0" prefWidth="14.0" />
+      <JFXTextField fx:id="txtReason" alignment="CENTER" focusColor="BLACK" layoutX="898.0" layoutY="401.0" onKeyReleased="#KeyOnType" prefHeight="69.0" prefWidth="288.0" promptText="Reason" unFocusColor="BLACK">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton buttonType="RAISED" layoutX="965.0" layoutY="504.0" onAction="#btnAddOnAction" prefHeight="69.0" prefWidth="172.0" styleClass="addBtn" stylesheets="@../assests/style/po.css" text="Add" />
+      <JFXTextField fx:id="txtWastageId" alignment="CENTER" editable="false" focusColor="BLACK" layoutX="1006.0" layoutY="160.0" prefHeight="60.0" prefWidth="149.0" unFocusColor="BLACK">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </JFXTextField>
+      <Label alignment="CENTER" layoutX="891.0" layoutY="162.0" prefHeight="60.0" prefWidth="118.0" text="Wastage ID :">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

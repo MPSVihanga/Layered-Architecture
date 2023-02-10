@@ -1,0 +1,41 @@
+.gradient-background{
+    -fx-background-color: #b7f4d8;
+
+}
+.supplierMain{
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-text-fill: black;
+    -fx-font-size: 25px;
+}
+.supplierregistersearch{
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+    -fx-prompt-text-fill: black;
+}
+.supplierregister {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+    -fx-prompt-text-fill: black;
+}
+
+.registerBtn{
+    -fx-background-color:  #3fc380;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-border-radius: 30px;
+    -fx-border-width: 3px;
+    -fx-border-color: white;
+    -fx-background-radius: 30px;
+}
+.registerBtn:hover{
+    -fx-background-color: white;
+    -fx-border-color: #3fc380;
+    -fx-border-radius: 30px;
+    -fx-border-width: 3px;
+    -fx-text-fill:#3fc380 ;
+    -fx-background-radius: 30px;
+
+}
