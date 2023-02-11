@@ -20,10 +20,8 @@ import javafx.stage.Stage;
 import lk.ijse.supermarket.dao.*;
 import lk.ijse.supermarket.dao.custom.POSDAO;
 import lk.ijse.supermarket.dao.custom.ProductDAO;
-import lk.ijse.supermarket.dao.custom.imple.OrderDAOImpl;
-import lk.ijse.supermarket.dao.custom.imple.OrderDetailsDAOImpl;
-import lk.ijse.supermarket.dao.custom.imple.POSDAOImpl;
-import lk.ijse.supermarket.dao.custom.imple.ProductDAOImpl;
+import lk.ijse.supermarket.dao.custom.QueryDAO;
+import lk.ijse.supermarket.dao.custom.imple.*;
 import lk.ijse.supermarket.db.DBConnection;
 import lk.ijse.supermarket.dto.*;
 //import lk.ijse.supermarket.util.enm.TextFields;
@@ -57,7 +55,7 @@ public class POSController {
     public JFXTextField txtFinalAmount;
     public JFXTextField txtPaymentCash;
     public JFXTextField txtBalance;
-    public JFXComboBox<Product> cmbPOSProduct;
+    public JFXComboBox<ProductDTO> cmbPOSProduct;
     public JFXTextField txtOrderID;
     public Label lblBalanceRS;
     public Label lblBalanceWarrning;
@@ -66,13 +64,14 @@ public class POSController {
     public Label lblDate;
     public Label lblTime;
 
-    private final CrudDAO<Order,String> orderDetailsDAOImpl = new OrderDetailsDAOImpl();
+    private final CrudDAO<OrderDTO,String> orderDetailsDAOImpl = new OrderDetailsDAOImpl();
 
-    private final CrudDAO<Order,String> orderDAOImpl = new OrderDAOImpl();
+    private final CrudDAO<OrderDTO,String> orderDAOImpl = new OrderDAOImpl();
 
     private final POSDAO posDAOImpl = new POSDAOImpl();
 
     private final ProductDAO productDAO = new ProductDAOImpl();
+    private final QueryDAO queryDAO = new QueryDAOImpl();
 
     public void initialize() throws SQLException, ClassNotFoundException {
         colProductId.setCellValueFactory(new PropertyValueFactory<>("productId"));
@@ -121,7 +120,7 @@ public class POSController {
         ResultSet resultSet = posDAOImpl.loadProductOnAction();
 
         while (resultSet.next()) {
-            Product product= new Product(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+            ProductDTO product= new ProductDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
             cmbPOSProduct.getItems().add(product);
         }
 
@@ -153,7 +152,7 @@ public class POSController {
 
     }
 
-    ObservableList<POSDetails> obPOSDetailList= FXCollections.observableArrayList();
+    ObservableList<POSDetailsDTO> obPOSDetailList= FXCollections.observableArrayList();
     double finalAmount=0;
     public void btnAddProductOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
@@ -161,7 +160,7 @@ public class POSController {
         while (resultSet.next()) {
             if (txtQty.getText().isEmpty()){
                // System.out.println(txtQty.getText());
-                new Alert(Alert.AlertType.INFORMATION,"Out of Stock ").show();
+                new Alert(Alert.AlertType.INFORMATION,"Out of StockTM ").show();
             }else {
                 int substring = Integer.parseInt(lblQtyCount.getText().split(" ")[1]);
                 //System.out.println(substring);
@@ -173,12 +172,12 @@ public class POSController {
                     lblOutOfStocks.setVisible(false);
                     double finalPrice = (resultSet.getDouble(2) * (100 - resultSet.getDouble(1)) / 100) * Integer.parseInt(txtQty.getText());
 
-                    POSDetails posDetails = new POSDetails(cmbPOSProduct.getValue().getPid(), cmbPOSProduct.getValue().getPbName(),
+                    POSDetailsDTO posDetails = new POSDetailsDTO(cmbPOSProduct.getValue().getPid(), cmbPOSProduct.getValue().getPbName(),
                             cmbPOSProduct.getValue().getPname(), Integer.parseInt(txtQty.getText()), finalPrice);
 
                     obPOSDetailList.add(posDetails);
 
-                    ObservableList<POSDetails> totalAmount = tblPOS.getItems();
+                    ObservableList<POSDetailsDTO> totalAmount = tblPOS.getItems();
 
                     for (int i = 0; i < totalAmount.size(); i++) {
                         finalAmount = finalAmount + totalAmount.get(i).getPrice();
@@ -236,8 +235,8 @@ public class POSController {
 
         DBConnection.getDbConnection().getConnection().setAutoCommit(false);
         try {
-            ObservableList<POSDetails> items = tblPOS.getItems();
-            boolean isOrderUpdated = orderDAOImpl.save(new Order(txtOrderID.getText(), LocalDate.now(),
+            ObservableList<POSDetailsDTO> items = tblPOS.getItems();
+            boolean isOrderUpdated = orderDAOImpl.save(new OrderDTO(txtOrderID.getText(), LocalDate.now(),
                     LocalTime.now(), Double.parseDouble(txtFinalAmount.getText())));
             if (isOrderUpdated) {
                 for (int i = 0; i < items.size(); i++) {
@@ -250,9 +249,9 @@ public class POSController {
                         int getQty = resultSet.getInt(1);
                         int finalQty = getQty - qty;
 
-                        boolean isAddePODetails = orderDetailsDAOImpl.save(new Order(txtOrderID.getText(), produtId));
+                        boolean isAddePODetails = orderDetailsDAOImpl.save(new OrderDTO(txtOrderID.getText(), produtId));
                         if (isAddePODetails) {
-                            productDAO.updatePOSQty(new Product(produtId, finalQty));
+                            productDAO.updatePOSQty(new ProductDTO(produtId, finalQty));
                             System.out.println("Qty Updated");
                             DBConnection.getDbConnection().getConnection().commit();
 
@@ -290,7 +289,7 @@ public class POSController {
 
     public void showReport() throws JRException, SQLException, ClassNotFoundException {
         JasperDesign jasperDesign = JRXmlLoader.load("/Users/mpsvihanga/Documents/FX/Supermarket/src/lk/ijse/supermarket/report/posReport.jrxml");
-        String query = "SELECT `Supermarket`.orders.`totalPrice`, `Supermarket`.product.name, `Supermarket`.product.`brndName`, `Supermarket`.product.qty, `Supermarket`.product.`qtyType`, `Supermarket`.product.`sellingUnitPrice`, `Supermarket`.product.`sellingDiscount` FROM `Supermarket`.`orderDetails` INNER JOIN `Supermarket`.orders ON `Supermarket`.orders.`oId` = `Supermarket`.`orderDetails`.`ordrDOrderId` INNER JOIN `Supermarket`.product ON `Supermarket`.product.`prdctId` = `Supermarket`.`orderDetails`.`ordrDPrdctId` where ordrDOrderId = \""+txtOrderID.getText()+"\"";
+        String query = queryDAO.reportJoinQuery(txtOrderID.getText());
         JRDesignQuery updateQuery = new JRDesignQuery();
         updateQuery.setText(query);
         jasperDesign.setQuery(updateQuery);
@@ -303,7 +302,7 @@ public class POSController {
     }
 
 
-    /*public void KeyOnType(KeyEvent keyEvent) {
+    public void KeyOnType(KeyEvent keyEvent) {
         Regex.isTextFieldValid(TextFields.INTEGER,txtQty);
-    }*/
+    }
 }

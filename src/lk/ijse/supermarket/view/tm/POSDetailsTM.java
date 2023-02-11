@@ -1,16 +1,16 @@
-package lk.ijse.supermarket.dto;
+package lk.ijse.supermarket.view.tm;
 
-public class POSDetails {
+public class POSDetailsTM {
     private String productId;
     private String brandName;
     private String productName;
     private int qty;
     private double price;
 
-    public POSDetails() {
+    public POSDetailsTM() {
     }
 
-    public POSDetails(String productId, String brandName, String productName, int qty, double price) {
+    public POSDetailsTM(String productId, String brandName, String productName, int qty, double price) {
         this.productId = productId;
         this.brandName = brandName;
         this.productName = productName;

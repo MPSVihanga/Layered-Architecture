@@ -1,8 +1,9 @@
 package lk.ijse.supermarket.dao.custom.imple;
 
 import lk.ijse.supermarket.dao.custom.StockDAO;
-import lk.ijse.supermarket.dto.Stock;
+import lk.ijse.supermarket.dto.StockDTO;
 import lk.ijse.supermarket.dao.CRUD;
+import lk.ijse.supermarket.view.tm.ProductTM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,16 +11,16 @@ import java.util.ArrayList;
 
 public class StockDAOImpl implements StockDAO {
     @Override
-    public ArrayList<Stock> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
+    public ArrayList<ProductTM> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean save(Stock name) throws SQLException, ClassNotFoundException {
+    public boolean save(StockDTO name) throws SQLException, ClassNotFoundException {
         return false;
     }
     @Override
-    public boolean update(Stock updateStock) throws SQLException, ClassNotFoundException {
+    public boolean update(StockDTO updateStock) throws SQLException, ClassNotFoundException {
        return CRUD.execute("UPDATE Supermarket.product SET sellingDiscount = ?, sellingUnitPrice = ?  WHERE name=? ",
                updateStock.getDiscount(),updateStock.getUnitPrice(), updateStock.getPname());
     }

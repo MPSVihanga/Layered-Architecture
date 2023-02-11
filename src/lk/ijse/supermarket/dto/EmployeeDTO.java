@@ -2,7 +2,7 @@ package lk.ijse.supermarket.dto;
 
 import java.time.LocalDate;
 
-public class Employee {
+public class EmployeeDTO {
     private String id;
     private String name;
     private int age;
@@ -13,10 +13,10 @@ public class Employee {
     private String tel;
     private String jobRole;
 
-    public Employee() {
+    public EmployeeDTO() {
     }
 
-    public Employee(String id, String name, int age, String email, String nic, LocalDate date, String address, String tel) {
+    public EmployeeDTO(String id, String name, int age, String email, String nic, LocalDate date, String address, String tel) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -28,7 +28,7 @@ public class Employee {
     }
 
 
-    public Employee(String id, String name, int age, String email, String nic, LocalDate date, String address, String tel, String jobRole) {
+    public EmployeeDTO(String id, String name, int age, String email, String nic, LocalDate date, String address, String tel, String jobRole) {
         this.id = id;
         this.name = name;
         this.age = age;

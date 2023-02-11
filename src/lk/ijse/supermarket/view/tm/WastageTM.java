@@ -1,18 +1,18 @@
-package lk.ijse.supermarket.dto;
+package lk.ijse.supermarket.view.tm;
 
 import java.time.LocalDate;
 
-public class Wastage {
+public class WastageTM {
     private String wastageId;
     private String productId;
     private LocalDate date;
     private int qty;
     private String reason;
 
-    public Wastage() {
+    public WastageTM() {
     }
 
-    public Wastage(String wastageId, String productId, LocalDate date, int qty, String reason) {
+    public WastageTM(String wastageId, String productId, LocalDate date, int qty, String reason) {
         this.wastageId = wastageId;
         this.productId = productId;
         this.date = date;

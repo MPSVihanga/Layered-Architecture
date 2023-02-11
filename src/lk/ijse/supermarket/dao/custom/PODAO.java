@@ -1,12 +1,12 @@
 package lk.ijse.supermarket.dao.custom;
 
 import lk.ijse.supermarket.dao.CrudDAO;
-import lk.ijse.supermarket.dto.PO;
+import lk.ijse.supermarket.dto.PODTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public interface PODAO extends CrudDAO<PO,String> {
+public interface PODAO extends CrudDAO<PODTO,String> {
 
     public ResultSet loadProductOnAction() throws SQLException, ClassNotFoundException;
 

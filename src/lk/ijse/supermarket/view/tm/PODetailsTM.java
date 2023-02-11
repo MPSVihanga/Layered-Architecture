@@ -1,14 +1,14 @@
-package lk.ijse.supermarket.dto;
+package lk.ijse.supermarket.view.tm;
 
-public class PODetails extends PO {
+public class PODetailsTM extends POTM {
     private String poDpoID;
     private String poDprdctID;
 
 
-    public PODetails() {
+    public PODetailsTM() {
     }
 
-    public PODetails(String poDpoID, String poDprdctID) {
+    public PODetailsTM(String poDpoID, String poDprdctID) {
         this.poDpoID = poDpoID;
         this.poDprdctID = poDprdctID;
 

@@ -16,11 +16,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.supermarket.dao.CrudDAO;
 import lk.ijse.supermarket.dao.custom.PODAO;
 import lk.ijse.supermarket.dao.custom.PODetailsDAO;
 import lk.ijse.supermarket.dao.custom.ProductDAO;
-import lk.ijse.supermarket.dto.PO;
+import lk.ijse.supermarket.dto.PODTO;
 import lk.ijse.supermarket.dao.custom.imple.PODetailsDAOImpl;
 import lk.ijse.supermarket.dao.custom.imple.PODAOImpl;
 import lk.ijse.supermarket.dao.custom.imple.ProductDAOImpl;
@@ -38,14 +37,14 @@ import java.time.LocalDate;
 public class POController {
     public AnchorPane poContextPane;
 
-    public JFXComboBox<Product> cmbProduct;
-    public JFXComboBox<Supplier> cmbSupplier;
+    public JFXComboBox<ProductDTO> cmbProduct;
+    public JFXComboBox<SupplierDTO> cmbSupplier;
 
     public JFXTextField txtPOId;
     public JFXTextField txtQty;
     public JFXTextField txtQtyType;
 
-    public TableView<PoAndDetails> tblPO;
+    public TableView<PoAndDetailsDTO> tblPO;
 
     public TableColumn colPOId;
     public TableColumn colSupId;
@@ -82,22 +81,22 @@ public class POController {
     private void autoIncrementId() throws SQLException, ClassNotFoundException {
 
         if(txtPOId.getText().isEmpty()){
-            txtPOId.setText("PO-0001");
+            txtPOId.setText("POTM-0001");
         }
         ResultSet rs= poDAOImpl.autoIncrementID();
         while (rs.next()) {
             String check = rs.getString(1);
 
-            if (!check.isEmpty() && txtPOId.getText().equals("PO-0001")) {
+            if (!check.isEmpty() && txtPOId.getText().equals("POTM-0001")) {
                 int id = Integer.parseInt(rs.getString(1).substring(3));
                 id++;
-                txtPOId.setText(String.format("PO-%04d", id));
+                txtPOId.setText(String.format("POTM-%04d", id));
             }
         }
     }
 
     public void loadProductOnAction(MouseEvent mouseEvent) throws IOException {
-        URL resource = getClass().getResource("../view/Product.fxml");
+        URL resource = getClass().getResource("../view/ProductTM.fxml");
         Parent load = FXMLLoader.load(resource);
         Scene scene = new Scene(load);
         Stage stage = new Stage();
@@ -109,7 +108,7 @@ public class POController {
         ResultSet resultSet = poDAOImpl.loadProductOnAction();
 
         while (resultSet.next()) {
-           Product product= new Product(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+           ProductDTO product= new ProductDTO(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
 
             cmbProduct.getItems().add(product);
         }
@@ -120,7 +119,7 @@ public class POController {
         ResultSet rst= poDAOImpl.loadSupplierOnAction();
 
         while (rst.next()) {
-            Supplier supplier = new Supplier(rst.getString(1), rst.getString(4));
+            SupplierDTO supplier = new SupplierDTO(rst.getString(1), rst.getString(4));
             cmbSupplier.getItems().add(supplier);
         }
 
@@ -144,11 +143,11 @@ public class POController {
 
     //=============================================================================================================
 
-    ObservableList<PoAndDetails> obPoAndDetailList=FXCollections.observableArrayList();
+    ObservableList<PoAndDetailsDTO> obPoAndDetailList=FXCollections.observableArrayList();
 
     public void btnSaveOnAcion(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
-        PoAndDetails poAndD =new PoAndDetails(txtPOId.getText(), cmbSupplier.getValue().getId(), cmbProduct.getValue().getPid(),
+        PoAndDetailsDTO poAndD =new PoAndDetailsDTO(txtPOId.getText(), cmbSupplier.getValue().getId(), cmbProduct.getValue().getPid(),
                 cmbProduct.getValue().getPbName(), cmbProduct.getValue().getPname(), Integer.parseInt(txtQty.getText()), txtQtyType.getText() );
 
                     obPoAndDetailList.add(poAndD);
@@ -162,13 +161,13 @@ public class POController {
 
     public void btnCompleteOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
-        ObservableList<PoAndDetails> items = tblPO.getItems();
+        ObservableList<PoAndDetailsDTO> items = tblPO.getItems();
 
         String poID= items.get(0).getPoId();
         String supID=items.get(0).getSupId();
 
 
-        boolean isAddedPO = poDAOImpl.save(new PO(poID, supID,LocalDate.now()));
+        boolean isAddedPO = poDAOImpl.save(new PODTO(poID, supID,LocalDate.now()));
         if(isAddedPO){
             for (int i = 0; i < items.size(); i++) {
 
@@ -183,9 +182,9 @@ public class POController {
                     int getQty = resultSet.getInt(1);
                     int finalQty = getQty + qty;
 
-                    boolean isAddePODetails = poDetailDAOImpl.save(new PODetails(poID, productID));
+                    boolean isAddePODetails = poDetailDAOImpl.save(new PODetailsDTO(poID, productID));
                     if (isAddePODetails) {
-                        productDAO.updateQty(new Product(productID, finalQty, qtyType));
+                        productDAO.updateQty(new ProductDTO(productID, finalQty, qtyType));
                         System.out.println("Qty Updated");
                     }
                     if (items.size() - 1 == i) {

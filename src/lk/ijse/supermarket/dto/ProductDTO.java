@@ -2,7 +2,7 @@ package lk.ijse.supermarket.dto;
 
 import java.time.LocalDate;
 
-public class Product {
+public class ProductDTO {
     private String pid;
     private String pbName;
     private String pname;
@@ -14,23 +14,23 @@ public class Product {
     private double discount;
     private double price;
 
-    public Product() {
+    public ProductDTO() {
     }
 
-    public Product(String pid, int qty, String qtyType) {
+    public ProductDTO(String pid, int qty, String qtyType) {
         this.pid = pid;
         this.qty = qty;
         this.qtyType = qtyType;
     }
 
-    public Product(String pid, String pbName, String pname) {
+    public ProductDTO(String pid, String pbName, String pname) {
         this.setPid(pid);
         this.setPbName(pbName);
         this.setPname(pname);
     }
 
 
-    public Product(String pid, String pbName, String pname, String pcategory, LocalDate mfdDate, LocalDate expDate, int qty, String qtyType, double discount, double price) {
+    public ProductDTO(String pid, String pbName, String pname, String pcategory, LocalDate mfdDate, LocalDate expDate, int qty, String qtyType, double discount, double price) {
         this.pid = pid;
         this.pbName = pbName;
         this.pname = pname;
@@ -43,7 +43,7 @@ public class Product {
         this.price = price;
     }
 
-    public Product(String pid, int qty) {
+    public ProductDTO(String pid, int qty) {
         this.pid = pid;
         this.qty = qty;
     }

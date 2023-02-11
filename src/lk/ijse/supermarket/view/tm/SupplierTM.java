@@ -1,9 +1,9 @@
-package lk.ijse.supermarket.dto;
+package lk.ijse.supermarket.view.tm;
 
 import java.time.LocalDate;
 
 
-public class Supplier {
+public class SupplierTM {
 
     private String Id;
     private String companyName;
@@ -14,12 +14,12 @@ public class Supplier {
     private String adderss;
     private String companyEmail;
 
-    public Supplier(String id, String supplierName) {
+    public SupplierTM(String id, String supplierName) {
         Id = id;
         this.supplierName = supplierName;
     }
 
-    public Supplier(String id, String companyName, String companyTel, String supplierName, String supplierTel, LocalDate date, String adderss, String companyEmail) {
+    public SupplierTM(String id, String companyName, String companyTel, String supplierName, String supplierTel, LocalDate date, String adderss, String companyEmail) {
         Id = id;
         this.companyName = companyName;
         this.companyTel = companyTel;
@@ -30,7 +30,7 @@ public class Supplier {
         this.companyEmail = companyEmail;
     }
 
-    public Supplier() {
+    public SupplierTM() {
     }
 
 

@@ -2,15 +2,15 @@ package lk.ijse.supermarket.dto;
 
 import java.time.LocalDate;
 
-public class PO {
+public class PODTO {
     private String poID;
     private String poSupID;
     private LocalDate date;
 
-    public PO() {
+    public PODTO() {
     }
 
-    public PO(String poID, String poSupID, LocalDate date) {
+    public PODTO(String poID, String poSupID, LocalDate date) {
         this.poID = poID;
         this.poSupID = poSupID;
         this.date = date;

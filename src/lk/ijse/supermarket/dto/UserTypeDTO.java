@@ -1,14 +1,14 @@
 package lk.ijse.supermarket.dto;
 
-public class UserType {
+public class UserTypeDTO {
     private String usrTypeId;
     private String usrRole;
     private String usrEmpId;
 
-    public UserType() {
+    public UserTypeDTO() {
     }
 
-    public UserType(String usrTypeId, String usrRole, String usrEmpId) {
+    public UserTypeDTO(String usrTypeId, String usrRole, String usrEmpId) {
         this.usrTypeId = usrTypeId;
         this.usrRole = usrRole;
         this.usrEmpId = usrEmpId;

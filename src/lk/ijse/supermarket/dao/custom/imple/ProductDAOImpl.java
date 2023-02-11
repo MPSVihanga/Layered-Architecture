@@ -1,8 +1,9 @@
 package lk.ijse.supermarket.dao.custom.imple;
 
 import lk.ijse.supermarket.dao.custom.ProductDAO;
-import lk.ijse.supermarket.dto.Product;
+import lk.ijse.supermarket.dto.ProductDTO;
 import lk.ijse.supermarket.dao.CRUD;
+import lk.ijse.supermarket.view.tm.ProductTM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,13 +12,13 @@ import java.util.ArrayList;
 public class ProductDAOImpl implements ProductDAO {
 
     @Override
-    public ArrayList<Product> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
+    public ArrayList<ProductDTO> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
         ResultSet rst = CRUD.execute("SELECT * FROM Supermarket.product");
-        ArrayList<Product> array= new ArrayList<>();
+        ArrayList<ProductTM> array= new ArrayList<>();
 
         while (rst.next()){
             array.add(
-                    new Product(
+                    new ProductTM(
                             rst.getString(1),
                             rst.getString(2),
                             rst.getString(3),
@@ -35,14 +36,14 @@ public class ProductDAOImpl implements ProductDAO {
         return array;
     }
     @Override
-    public boolean save(Product product) throws SQLException, ClassNotFoundException {
+    public boolean save(ProductDTO product) throws SQLException, ClassNotFoundException {
         return CRUD.execute("INSERT INTO Supermarket.product VALUES (?,?,?,?,?,?,?,?,?,?)",
                 product.getPid(), product.getPbName(), product.getPname(), product.getPcategory(),
                 product.getMfdDate(), product.getExpDate(),product.getQty(),product.getQtyType(),product.getDiscount(),product.getPrice());
 
     }
     @Override
-    public  boolean update(Product product) throws SQLException, ClassNotFoundException {
+    public  boolean update(ProductDTO product) throws SQLException, ClassNotFoundException {
         return CRUD.execute("UPDATE Supermarket.product set brndName=? ,name= ? , category=? , mfdDate=? , expDate=?   where prdctId=?",
                 product.getPbName(), product.getPname(), product.getPcategory(), product.getMfdDate(), product.getExpDate(), product.getPid());
     }
@@ -58,12 +59,12 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public  boolean updateQty(Product updateQty) throws SQLException, ClassNotFoundException {
+    public  boolean updateQty(ProductDTO updateQty) throws SQLException, ClassNotFoundException {
         return CRUD.execute("UPDATE  Supermarket.product SET qty=? , qtyType=? WHERE prdctId=? ", updateQty.getQty(),updateQty.getQtyType(),updateQty.getPid());
     }
 
     @Override
-    public boolean updatePOSQty(Product updateQty) throws SQLException, ClassNotFoundException {
+    public boolean updatePOSQty(ProductDTO updateQty) throws SQLException, ClassNotFoundException {
         return CRUD.execute("UPDATE  Supermarket.product SET qty=?  WHERE prdctId=? ", updateQty.getQty(),updateQty.getPid());
     }
 

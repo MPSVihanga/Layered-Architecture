@@ -11,10 +11,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import lk.ijse.supermarket.dao.CrudDAO;
+import lk.ijse.supermarket.dao.custom.ProductDAO;
 import lk.ijse.supermarket.dao.custom.imple.ProductDAOImpl;
-import lk.ijse.supermarket.dto.Product;
+import lk.ijse.supermarket.dto.ProductDTO;
 import lk.ijse.supermarket.util.Regex;
 import lk.ijse.supermarket.util.emun.TextFields;
+import lk.ijse.supermarket.view.tm.ProductTM;
+import org.apache.commons.math.stat.descriptive.summary.Product;
 
 
 import java.sql.ResultSet;
@@ -23,6 +26,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ProductController {
+
     public JFXTextField txtPId;
     public JFXTextField txtBName;
     public JFXTextField txtName;
@@ -44,7 +48,7 @@ public class ProductController {
     static String qtyType= "empty";
     static double discount= 0.0;
 
-    private final CrudDAO<Product,String> productDAOImpl = new ProductDAOImpl();
+    private final ProductDAO productDAOImpl = new ProductDAOImpl();
 
     public void initialize(){
         colPId.setCellValueFactory(new PropertyValueFactory<>("pid"));
@@ -60,16 +64,15 @@ public class ProductController {
 
     public void loadAllCustomers() {
 
-        ObservableList<Product> obProductList = FXCollections.observableArrayList();
+        ObservableList<ProductDTO> obProductList = FXCollections.observableArrayList();
 
         try {
-            ArrayList<Product> allProduts = productDAOImpl.getAll();
-            for (Product p:allProduts){
+            ArrayList<ProductDTO> allProduts = productDAOImpl.getAll();
+            for (ProductDTO p: allProduts){
                 obProductList.add(p);
             }
-
-
             tblProduct.setItems(obProductList);
+
         } catch (SQLException | NullPointerException e) {
             System.out.println("load");
             e.printStackTrace();
@@ -100,7 +103,7 @@ public class ProductController {
 
         //===========================================================================================================
 
-        Product product =new Product(txtPId.getText(),txtBName.getText() , txtName.getText(),txtCategory.getText(),
+        ProductDTO product =new ProductDTO(txtPId.getText(),txtBName.getText() , txtName.getText(),txtCategory.getText(),
                 mfdDate.getValue(),expDate.getValue(),qty,qtyType,discount,sellPrice );
         try {
             boolean context = productDAOImpl.save(product);
@@ -120,7 +123,7 @@ public class ProductController {
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
 
-        Product product = new Product(txtPId.getText(),txtBName.getText(),txtName.getText(),txtCategory.getText(),
+        ProductDTO product = new ProductDTO(txtPId.getText(),txtBName.getText(),txtName.getText(),txtCategory.getText(),
                 LocalDate.now(),LocalDate.now(),qty,qtyType,discount,sellPrice);
         try {
             boolean isUpdated = productDAOImpl.update(product);

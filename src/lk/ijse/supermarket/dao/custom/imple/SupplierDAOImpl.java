@@ -1,8 +1,9 @@
 package lk.ijse.supermarket.dao.custom.imple;
 
 import lk.ijse.supermarket.dao.custom.SupplierDAO;
-import lk.ijse.supermarket.dto.Supplier;
+import lk.ijse.supermarket.dto.SupplierDTO;
 import lk.ijse.supermarket.dao.CRUD;
+import lk.ijse.supermarket.view.tm.ProductTM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,13 +12,13 @@ import java.util.ArrayList;
 public class SupplierDAOImpl implements SupplierDAO {
 
 @Override
-    public ArrayList<Supplier> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
+    public ArrayList<ProductTM> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
         ResultSet rst = CRUD.execute("SELECT * FROM Supermarket.supplier");
-        ArrayList<Supplier> array= new ArrayList<>();
+        ArrayList<SupplierDTO> array= new ArrayList<>();
 
         while (rst.next()){
             array.add(
-                    new Supplier(
+                    new SupplierDTO(
                             rst.getString(1),
                             rst.getString(2),
                             rst.getString(3),
@@ -33,7 +34,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
 @Override
-    public boolean save(Supplier supplier) throws SQLException, ClassNotFoundException {
+    public boolean save(SupplierDTO supplier) throws SQLException, ClassNotFoundException {
         return CRUD.execute("INSERT INTO Supermarket.supplier VALUES (?,?,?,?,?,?,?,?)",
                 supplier.getId(),supplier.getCompanyName(),supplier.getCompanyTel(),
                 supplier.getSupplierName(),supplier.getSupplierTel(),supplier.getDate(),
@@ -42,7 +43,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
 @Override
-    public boolean update(Supplier supplier) throws SQLException, ClassNotFoundException {
+    public boolean update(SupplierDTO supplier) throws SQLException, ClassNotFoundException {
         return CRUD.execute("UPDATE Supermarket.supplier set companyName=? ,companyTel= ? ," +
                         " supplierName=? , supplierTel=? , dateRegisterd=? , " +
                         "address=? , companyEmail=?   where supId=?",

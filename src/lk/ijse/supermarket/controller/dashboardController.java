@@ -109,10 +109,10 @@ public class dashboardController implements SetUI {
     }
 
     public void loadPOOnAction(ActionEvent actionEvent) throws IOException {
-        setUi("../view/PO");
+        setUi("../view/POTM");
     }
     public void loadProductOnAction(ActionEvent actionEvent) throws IOException {
-        setUi("../view/Product");
+        setUi("../view/ProductTM");
     }
     public void loadWastageOnAction(ActionEvent actionEvent) throws IOException {
         setUi("../view/wastage");

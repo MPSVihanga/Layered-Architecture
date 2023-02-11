@@ -1,8 +1,9 @@
 package lk.ijse.supermarket.dao.custom.imple;
 
 import lk.ijse.supermarket.dao.custom.PODAO;
-import lk.ijse.supermarket.dto.PO;
+import lk.ijse.supermarket.dto.PODTO;
 import lk.ijse.supermarket.dao.CRUD;
+import lk.ijse.supermarket.view.tm.ProductTM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 public class PODAOImpl implements PODAO {
     @Override
-    public boolean save(PO po) throws SQLException, ClassNotFoundException {
+    public boolean save(PODTO po) throws SQLException, ClassNotFoundException {
 
         return CRUD.execute("INSERT INTO Supermarket.po VALUES (?,?,?)",
                 po.getPoID(), po.getPoSupID(), po.getDate());
@@ -19,12 +20,12 @@ public class PODAOImpl implements PODAO {
     }
 
     @Override
-    public ArrayList<PO> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
+    public ArrayList<ProductTM> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean update(PO supplier) throws SQLException, ClassNotFoundException {
+    public boolean update(PODTO supplier) throws SQLException, ClassNotFoundException {
         return false;
     }
 

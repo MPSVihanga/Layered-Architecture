@@ -13,8 +13,8 @@ import lk.ijse.supermarket.dao.CrudDAO;
 import lk.ijse.supermarket.dao.custom.StockDAO;
 import lk.ijse.supermarket.dao.custom.imple.ProductDAOImpl;
 import lk.ijse.supermarket.dao.custom.imple.StockDAOImpl;
-import lk.ijse.supermarket.dto.Product;
-import lk.ijse.supermarket.dto.Stock;
+import lk.ijse.supermarket.dto.ProductDTO;
+import lk.ijse.supermarket.dto.StockDTO;
 import lk.ijse.supermarket.util.Regex;
 import lk.ijse.supermarket.util.emun.TextFields;
 //import lk.ijse.supermarket.util.enm.TextFields;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class StockController {
 
-    public TableView<Product> tblStock;
+    public TableView<ProductDTO> tblStock;
 
     public TableColumn colBName;
     public TableColumn colPName;
@@ -42,7 +42,7 @@ public class StockController {
     public JFXTextField txtDiscount;
     public JFXTextField txtPrice;
 
-    private final CrudDAO<Product,String> productDAOImpl = new ProductDAOImpl();
+    private final CrudDAO<ProductDTO,String> productDAOImpl = new ProductDAOImpl();
     private final StockDAO stockDAO = new StockDAOImpl();
 
     public void initialize() throws SQLException, ClassNotFoundException {
@@ -75,13 +75,13 @@ public class StockController {
         }
     }
 
-    ObservableList<Product> loadProducttoStockTable = FXCollections.observableArrayList();
+    ObservableList<ProductDTO> loadProducttoStockTable = FXCollections.observableArrayList();
 
     private void loadProducts() throws SQLException, ClassNotFoundException {
 
         try {
-            ArrayList<Product> allProduts = productDAOImpl.getAll();
-            for (Product p:allProduts){
+            ArrayList<ProductDTO> allProduts = productDAOImpl.getAll();
+            for (ProductDTO p:allProduts){
                 loadProducttoStockTable.add(p);
             }
         } catch (SQLException | NullPointerException | ClassNotFoundException e) {
@@ -92,7 +92,7 @@ public class StockController {
 
     public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String value = String.valueOf(cmbProduct.getValue());
-        Stock updateStock = new Stock(
+        StockDTO updateStock = new StockDTO(
                 value,
                 Double.parseDouble(txtDiscount.getText()),
                 Double.parseDouble(txtPrice.getText())

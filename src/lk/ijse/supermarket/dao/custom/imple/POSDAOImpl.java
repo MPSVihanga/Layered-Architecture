@@ -1,8 +1,9 @@
 package lk.ijse.supermarket.dao.custom.imple;
 
 import lk.ijse.supermarket.dao.custom.POSDAO;
-import lk.ijse.supermarket.dto.POSDetails;
+import lk.ijse.supermarket.dto.POSDetailsDTO;
 import lk.ijse.supermarket.dao.CRUD;
+import lk.ijse.supermarket.view.tm.ProductTM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,17 +11,17 @@ import java.util.ArrayList;
 
 public class POSDAOImpl implements POSDAO {
     @Override
-    public ArrayList<POSDetails> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
+    public ArrayList<ProductTM> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean save(POSDetails name) throws SQLException, ClassNotFoundException {
+    public boolean save(POSDetailsDTO name) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(POSDetails name) throws SQLException, ClassNotFoundException {
+    public boolean update(POSDetailsDTO name) throws SQLException, ClassNotFoundException {
         return false;
     }
 

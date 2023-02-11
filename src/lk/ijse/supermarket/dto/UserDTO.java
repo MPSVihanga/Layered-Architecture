@@ -1,6 +1,6 @@
 package lk.ijse.supermarket.dto;
 
-public class User {
+public class UserDTO {
 
     private String userId;
     private String password;
@@ -8,10 +8,10 @@ public class User {
     private String answer;
     private String usrEmpId;
 
-    public User() {
+    public UserDTO() {
     }
 
-    public User(String userId, String password, String question, String answer, String usrEmpId) {
+    public UserDTO(String userId, String password, String question, String answer, String usrEmpId) {
         this.userId = userId;
         this.password = password;
         this.question = question;

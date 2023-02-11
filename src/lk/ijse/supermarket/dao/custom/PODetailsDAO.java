@@ -1,7 +1,7 @@
 package lk.ijse.supermarket.dao.custom;
 
 import lk.ijse.supermarket.dao.CrudDAO;
-import lk.ijse.supermarket.dto.PODetails;
+import lk.ijse.supermarket.dto.PODetailsDTO;
 
-public interface PODetailsDAO extends CrudDAO<PODetails,String> {
+public interface PODetailsDAO extends CrudDAO<PODetailsDTO,String> {
 }

@@ -1,8 +1,9 @@
 package lk.ijse.supermarket.dao.custom.imple;
 
 import lk.ijse.supermarket.dao.custom.OrderDAO;
-import lk.ijse.supermarket.dto.Order;
+import lk.ijse.supermarket.dto.OrderDTO;
 import lk.ijse.supermarket.dao.CRUD;
+import lk.ijse.supermarket.view.tm.ProductTM;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,19 +11,19 @@ import java.util.ArrayList;
 
 public class OrderDAOImpl implements OrderDAO {
     @Override
-    public boolean save(Order order) throws SQLException, ClassNotFoundException {
+    public boolean save(OrderDTO order) throws SQLException, ClassNotFoundException {
         return CRUD.execute("INSERT INTO Supermarket.orders VALUES (?,?,?,?)",
                 order.getOrderId(), order.getDate(), order.getTime(), order.getTotalPrice());
     }
 
 
     @Override
-    public ArrayList<Order> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
+    public ArrayList<ProductTM> getAll() throws SQLException, NullPointerException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean update(Order supplier) throws SQLException, ClassNotFoundException {
+    public boolean update(OrderDTO supplier) throws SQLException, ClassNotFoundException {
         return false;
     }
 

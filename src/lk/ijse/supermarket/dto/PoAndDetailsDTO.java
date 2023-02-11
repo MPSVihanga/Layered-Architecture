@@ -1,6 +1,6 @@
 package lk.ijse.supermarket.dto;
 
-public class PoAndDetails {
+public class PoAndDetailsDTO {
     private String poId;
     private String supId;
     private String productId;
@@ -9,10 +9,10 @@ public class PoAndDetails {
     private int qty;
     private String qtyType;
 
-    public PoAndDetails() {
+    public PoAndDetailsDTO() {
     }
 
-    public PoAndDetails(String poId, String supId, String productId, String productBName, String productName, int qty, String qtyType) {
+    public PoAndDetailsDTO(String poId, String supId, String productId, String productBName, String productName, int qty, String qtyType) {
         this.poId = poId;
         this.supId = supId;
         this.productId = productId;

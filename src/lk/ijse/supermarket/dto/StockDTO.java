@@ -2,7 +2,7 @@ package lk.ijse.supermarket.dto;
 
 import java.time.LocalDate;
 
-public class Stock {
+public class StockDTO {
 
     private String pbName;
     private String pname;
@@ -16,16 +16,16 @@ public class Stock {
 
 
 
-    public Stock() {
+    public StockDTO() {
     }
 
-    public Stock(String pname, double discount, double unitPrice) {
+    public StockDTO(String pname, double discount, double unitPrice) {
         this.setPname(pname);
         this.setDiscount(discount);
         this.setUnitPrice(unitPrice);
     }
 
-    public Stock(String pbName, String pname, String pcategory, LocalDate mfdDate, LocalDate expDate, int qty, String qtyType, double discount, double unitPrice) {
+    public StockDTO(String pbName, String pname, String pcategory, LocalDate mfdDate, LocalDate expDate, int qty, String qtyType, double discount, double unitPrice) {
         this.pbName = pbName;
         this.pname = pname;
         this.pcategory = pcategory;

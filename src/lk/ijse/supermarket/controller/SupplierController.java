@@ -15,7 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.supermarket.dao.CrudDAO;
 import lk.ijse.supermarket.dao.custom.imple.SupplierDAOImpl;
-import lk.ijse.supermarket.dto.Supplier;
+import lk.ijse.supermarket.dto.SupplierDTO;
 import lk.ijse.supermarket.util.Regex;
 import lk.ijse.supermarket.util.emun.TextFields;
 //import lk.ijse.supermarket.util.enm.TextFields;
@@ -38,7 +38,7 @@ public class SupplierController{
     public JFXTextField txtAddress;
     public JFXTextField txtEmail;
 
-    public TableView<Supplier> tblSupplier;
+    public TableView<SupplierDTO> tblSupplier;
 
     public TableColumn colId;
     public TableColumn colCName;
@@ -50,7 +50,7 @@ public class SupplierController{
     public TableColumn colEmail;
 
     //Property Injection
-    private final CrudDAO<Supplier,String> supplierDAOImpl = new SupplierDAOImpl();
+    private final CrudDAO<SupplierDTO,String> supplierDAOImpl = new SupplierDAOImpl();
 
     public void initialize() throws SQLException,NullPointerException{
 
@@ -68,11 +68,11 @@ public class SupplierController{
 
     public void loadAllCustomers() {
 
-            ObservableList<Supplier> obSupplierList = FXCollections.observableArrayList();
+            ObservableList<SupplierDTO> obSupplierList = FXCollections.observableArrayList();
 
         try {
-                ArrayList<Supplier> allSupplier = supplierDAOImpl.getAll();
-                for (Supplier s :allSupplier){
+                ArrayList<SupplierDTO> allSupplier = supplierDAOImpl.getAll();
+                for (SupplierDTO s :allSupplier){
                     obSupplierList.add(s);
                 }
                     tblSupplier.setItems(obSupplierList);
@@ -146,7 +146,7 @@ public class SupplierController{
 
         //=====================================================================================================
 
-        Supplier supplier=new Supplier(txtId.getText(),txtCName.getText() , txtCTel.getText(),
+        SupplierDTO supplier=new SupplierDTO(txtId.getText(),txtCName.getText() , txtCTel.getText(),
                 txtSName.getText() , txtSTel.getText() , LocalDate.now(),
                 txtAddress.getText(),txtEmail.getText());
         try {
@@ -172,7 +172,7 @@ public class SupplierController{
 
     public void updateSupplierOnAction(ActionEvent actionEvent) throws SQLException {
 
-        Supplier supplier = new Supplier(txtId.getText(),txtCName.getText(),txtCTel.getText(),
+        SupplierDTO supplier = new SupplierDTO(txtId.getText(),txtCName.getText(),txtCTel.getText(),
                 txtSName.getText(),txtSTel.getText(),LocalDate.now(),txtAddress.getText(),
                 txtEmail.getText());
 
