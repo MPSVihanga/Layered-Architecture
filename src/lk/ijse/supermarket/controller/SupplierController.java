@@ -1,6 +1,7 @@
 package lk.ijse.supermarket.controller;
 
 
+import animatefx.animation.Shake;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -10,10 +11,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.supermarket.dao.CrudDAO;
 import lk.ijse.supermarket.dao.custom.imple.SupplierDAOImpl;
 import lk.ijse.supermarket.dto.Supplier;
+import lk.ijse.supermarket.util.Regex;
+import lk.ijse.supermarket.util.emun.TextFields;
 //import lk.ijse.supermarket.util.enm.TextFields;
 
 import java.sql.ResultSet;
@@ -84,7 +88,7 @@ public class SupplierController{
 
     //==================================================================================================
 
-       /* boolean txtFCName = Regex.isTextFieldValid(TextFields.NAME, txtCName);
+        boolean txtFCName = Regex.isTextFieldValid(TextFields.NAME, txtCName);
             if (!txtFCName){
                 new Shake(txtCName).play();
                 txtCName.setStyle("-fx-prompt-text-fill: red");
@@ -119,7 +123,7 @@ public class SupplierController{
                 new Shake(txtEmail).play();
                 txtEmail.setStyle("-fx-prompt-text-fill: red");
                 return;
-            }*/
+            }
 
 
     //====================================================================================================
@@ -209,12 +213,12 @@ public class SupplierController{
 
     }
 
-   /* public void keyOnType(KeyEvent keyEvent) {
+    public void keyOnType(KeyEvent keyEvent) {
        Regex.isTextFieldValid(TextFields.NAME,txtCName);
         Regex.isTextFieldValid(TextFields.TEL,txtCTel);
         Regex.isTextFieldValid(TextFields.NAME,txtSName);
         Regex.isTextFieldValid(TextFields.TEL,txtSTel);
         Regex.isTextFieldValid(TextFields.ADDRESS,txtAddress);
         Regex.isTextFieldValid(TextFields.EMAIL,txtEmail);
-    }*/
+    }
 }

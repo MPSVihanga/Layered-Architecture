@@ -8,12 +8,15 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.supermarket.dao.CrudDAO;
 import lk.ijse.supermarket.dao.custom.StockDAO;
 import lk.ijse.supermarket.dao.custom.imple.ProductDAOImpl;
 import lk.ijse.supermarket.dao.custom.imple.StockDAOImpl;
 import lk.ijse.supermarket.dto.Product;
 import lk.ijse.supermarket.dto.Stock;
+import lk.ijse.supermarket.util.Regex;
+import lk.ijse.supermarket.util.emun.TextFields;
 //import lk.ijse.supermarket.util.enm.TextFields;
 
 import java.sql.ResultSet;
@@ -111,8 +114,8 @@ public class StockController {
         txtDiscount.clear();
     }
 
-    /*public void KeyOnType(KeyEvent keyEvent) {
+    public void KeyOnType(KeyEvent keyEvent) {
         Regex.isTextFieldValid(TextFields.DOUBLE,txtPrice);
         Regex.isTextFieldValid(TextFields.DOUBLE,txtDiscount);
-    }*/
+    }
 }

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -24,6 +25,8 @@ import lk.ijse.supermarket.dao.custom.imple.PODetailsDAOImpl;
 import lk.ijse.supermarket.dao.custom.imple.PODAOImpl;
 import lk.ijse.supermarket.dao.custom.imple.ProductDAOImpl;
 import lk.ijse.supermarket.dto.*;
+import lk.ijse.supermarket.util.Regex;
+import lk.ijse.supermarket.util.emun.TextFields;
 //import lk.ijse.supermarket.util.enm.TextFields;
 
 import java.io.IOException;
@@ -203,8 +206,8 @@ public class POController {
 
     }
 
-    /*public void KeyOnType(KeyEvent keyEvent) {
+    public void KeyOnType(KeyEvent keyEvent) {
         Regex.isTextFieldValid(TextFields.INTEGER,txtQty);
         Regex.isTextFieldValid(TextFields.NAME,txtQtyType);
-    }*/
+    }
 }

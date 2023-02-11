@@ -9,9 +9,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.supermarket.dao.CrudDAO;
 import lk.ijse.supermarket.dao.custom.imple.ProductDAOImpl;
 import lk.ijse.supermarket.dto.Product;
+import lk.ijse.supermarket.util.Regex;
+import lk.ijse.supermarket.util.emun.TextFields;
 
 
 import java.sql.ResultSet;
@@ -153,10 +156,10 @@ public class ProductController {
         }
     }
 
-    /*public void keyOnType(KeyEvent keyEvent) {
+    public void keyOnType(KeyEvent keyEvent) {
         Regex.isTextFieldValid(TextFields.ID,txtPId);
         Regex.isTextFieldValid(TextFields.NAME,txtBName);
         Regex.isTextFieldValid(TextFields.NAME,txtName);
         Regex.isTextFieldValid(TextFields.NAME,txtCategory);
-    }*/
+    }
 }

@@ -27,6 +27,8 @@ import lk.ijse.supermarket.dao.custom.imple.ProductDAOImpl;
 import lk.ijse.supermarket.db.DBConnection;
 import lk.ijse.supermarket.dto.*;
 //import lk.ijse.supermarket.util.enm.TextFields;
+import lk.ijse.supermarket.util.Regex;
+import lk.ijse.supermarket.util.emun.TextFields;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -196,7 +198,7 @@ public class POSController {
 
     public void EnterKeyPressedOnAction(KeyEvent keyEvent) {
 
-        //Regex.isTextFieldValid(TextFields.INTEGER,txtPaymentCash);
+        Regex.isTextFieldValid(TextFields.INTEGER,txtPaymentCash);
 
         if ( keyEvent.getCode()==keyEvent.getCode().ENTER){
             if( !(txtPaymentCash.getText().isEmpty()) ) {

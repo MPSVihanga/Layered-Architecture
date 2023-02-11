@@ -8,12 +8,15 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.supermarket.dao.custom.ProductDAO;
 import lk.ijse.supermarket.dao.custom.WastageDAO;
 import lk.ijse.supermarket.dao.custom.imple.ProductDAOImpl;
 import lk.ijse.supermarket.dao.custom.imple.WastageDAOImpl;
 import lk.ijse.supermarket.dto.Product;
 import lk.ijse.supermarket.dto.Wastage;
+import lk.ijse.supermarket.util.Regex;
+import lk.ijse.supermarket.util.emun.TextFields;
 //import lk.ijse.supermarket.util.enm.TextFields;
 
 import java.sql.ResultSet;
@@ -125,8 +128,8 @@ public class WastageController {
         txtReason.clear();
     }
 
-    /*public void KeyOnType(KeyEvent keyEvent) {
+    public void KeyOnType(KeyEvent keyEvent) {
         Regex.isTextFieldValid(TextFields.INTEGER,txtQty);
         Regex.isTextFieldValid(TextFields.NAME,txtReason);
-    }*/
+    }
 }
